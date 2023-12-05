@@ -19,7 +19,7 @@
 *               
 * Macros:       None
 *         
-* Assumptions: DEMO PURPOSES 20231114 QC
+* Assumptions: Here is my comment
 *
 * ____________________________________________________________________________
 * PROGRAM HISTORY                                   
