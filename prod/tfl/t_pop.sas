@@ -19,7 +19,7 @@
 *               
 * Macros:       tfl_metadata.sas
 *         
-* Assumptions: 
+* Assumptions: This is a demo comment
 *
 * ____________________________________________________________________________
 * PROGRAM HISTORY                                   

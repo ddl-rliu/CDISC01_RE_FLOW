@@ -19,7 +19,7 @@
 *               
 * Macros:       None
 *         
-* Assumptions: 
+* Assumptions: Demo only
 *
 * ____________________________________________________________________________
 * PROGRAM HISTORY                                   
