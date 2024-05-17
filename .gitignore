@@ -1,3 +1,5 @@
 dhparams.pem
 /.vscode
-/.snakemake
+/.snakemake/
+__pycache__/
+*.py[cod]
