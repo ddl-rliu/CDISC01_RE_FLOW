@@ -6,7 +6,7 @@ from utils.tfl import create_tfl_report
 from typing import TypeVar
 
 @workflow
-def sce_workflow(sdtm_data_path: str) -> (PDFFile, PDFFile):
+def sce_workflow(sdtm_data_path: str) -> (PDFFile, PDFFile, PDFFile):
     """
     This script mocks a sample clinical trial using Domino Flows. 
 
@@ -45,7 +45,15 @@ def sce_workflow(sdtm_data_path: str) -> (PDFFile, PDFFile):
         sdtm_data_path=sdtm_data_path, 
         dependencies=[adsl, adae]
     )
-    # Create task that generates TFL report from ADAE dataset.
+    # Create task that generates TFL report from T_POP table.
+    t_pop = create_tfl_report(
+        name="T_POP", 
+        command="sas -stdio prod/tfl/t_pop.sas", 
+        environment="SAS Analytics Pro",
+        hardware_tier= "Small",
+        dependencies=[adsl]
+    )
+    # Create task that generates TFL report from T_POP table.
     t_ae_rel = create_tfl_report(
         name="T_AE_REL", 
         command="sas -stdio prod/tfl/t_ae_rel.sas", 
@@ -53,7 +61,7 @@ def sce_workflow(sdtm_data_path: str) -> (PDFFile, PDFFile):
         hardware_tier= "Small",
         dependencies=[adae]
     )
-    # Create task that generates TFL report from ADVS dataset
+    # Create task that generates TFL report from T_POP table
     t_vscat = create_tfl_report(
         name="T_VSCAT", 
         command="sas -stdio prod/tfl/t_ae_rel.sas", 
@@ -61,4 +69,4 @@ def sce_workflow(sdtm_data_path: str) -> (PDFFile, PDFFile):
         hardware_tier= "Small",
         dependencies=[advs]
     )
-    return t_ae_rel, t_vscat
+    return t_pop, t_ae_rel, t_vscat

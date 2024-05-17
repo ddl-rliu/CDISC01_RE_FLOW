@@ -32,6 +32,10 @@
 %include "/mnt/code/domino.sas";
 *********;
 
+options dlcreatedir;
+libname inputs "/workflow/inputs"; /* All inputs live in this directory at workflow/inputs/<NAME OF INPUT> */ 
+libname outputs "/workflow/outputs"; /* All outputs must go to this directory at workflow/inputs/<NAME OF OUTPUT>y */ 
+
 ods path(prepend) work.templat(update);
 
 *Set the template for the output;
@@ -234,7 +238,7 @@ run;
 
 ** create the table output;
 
-ods pdf file = "/mnt/artifacts/TFL/&__prog_name..pdf"
+ods pdf file='/workflow/outputs/report' pdftoc=2
 		style = newstyle;
         
 ods noproctitle;
