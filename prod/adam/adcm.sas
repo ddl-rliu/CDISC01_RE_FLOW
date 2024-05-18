@@ -5,6 +5,7 @@
 * 
 *  For simplicity, we are going to just return the same dataset back
 *  and assume some data processing happened.
+* Dependant on SDTM and ADSL
 *****************************************************************************/
 options dlcreatedir;
 libname inputs "/workflow/inputs"; /* All inputs live in this directory at workflow/inputs/<NAME OF INPUT> */ 
