@@ -53,7 +53,7 @@ def sce_workflow(sdtm_data_path: str) -> (PDFFile, PDFFile, PDFFile):
         hardware_tier= "Small",
         dependencies=[adsl]
     )
-    # Create task that generates TFL report from T_POP table.
+    # Create task that generates TFL report from T_AE_REL table.
     t_ae_rel = create_tfl_report(
         name="T_AE_REL", 
         command="prod/tfl/t_ae_rel.sas", 
@@ -61,7 +61,7 @@ def sce_workflow(sdtm_data_path: str) -> (PDFFile, PDFFile, PDFFile):
         hardware_tier= "Small",
         dependencies=[adae]
     )
-    # Create task that generates TFL report from T_POP table
+    # Create task that generates TFL report from T_VSCAT table
     t_vscat = create_tfl_report(
         name="T_VSCAT", 
         command="prod/tfl/t_ae_rel.sas", 
