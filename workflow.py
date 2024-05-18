@@ -22,7 +22,7 @@ def sce_workflow(sdtm_data_path: str) -> (PDFFile, PDFFile, PDFFile):
     # Create task that generates ADSL dataset. This will run a unique Domino job and return its outputs.
     adsl = create_adam_data(
         name="ADSL", 
-        command="sas -stdio prod/adam/adsl.sas",
+        command="prod/adam/adsl.sas",
         environment="SAS Analytics Pro", # Optional parameter. If not set, then the default for the project will be used.
         hardware_tier= "Small", # Optional parameter. If not set, then the default for the project will be used.
         sdtm_data_path=sdtm_data_path # Note this this is simply the input value taken in from the command line argument
@@ -30,7 +30,7 @@ def sce_workflow(sdtm_data_path: str) -> (PDFFile, PDFFile, PDFFile):
     # Create task that generates ADAE dataset. 
     adae = create_adam_data(
         name="ADAE", 
-        command="sas -stdio prod/adam/adae.sas", 
+        command="prod/adam/adae.sas", 
         environment="SAS Analytics Pro",
         hardware_tier= "Small",
         sdtm_data_path=sdtm_data_path, 
@@ -39,7 +39,7 @@ def sce_workflow(sdtm_data_path: str) -> (PDFFile, PDFFile, PDFFile):
     # Create task that generates ADVS dataset. 
     advs = create_adam_data(
         name="ADVS", 
-        command="sas -stdio prod/adam/advs.sas", 
+        command="prod/adam/advs.sas", 
         environment="SAS Analytics Pro",
         hardware_tier= "Small",
         sdtm_data_path=sdtm_data_path, 
@@ -48,7 +48,7 @@ def sce_workflow(sdtm_data_path: str) -> (PDFFile, PDFFile, PDFFile):
     # Create task that generates TFL report from T_POP table.
     t_pop = create_tfl_report(
         name="T_POP", 
-        command="sas -stdio prod/tfl/t_pop.sas", 
+        command="prod/tfl/t_pop.sas", 
         environment="SAS Analytics Pro",
         hardware_tier= "Small",
         dependencies=[adsl]
@@ -56,7 +56,7 @@ def sce_workflow(sdtm_data_path: str) -> (PDFFile, PDFFile, PDFFile):
     # Create task that generates TFL report from T_POP table.
     t_ae_rel = create_tfl_report(
         name="T_AE_REL", 
-        command="sas -stdio prod/tfl/t_ae_rel.sas", 
+        command="prod/tfl/t_ae_rel.sas", 
         environment="SAS Analytics Pro",
         hardware_tier= "Small",
         dependencies=[adae]
@@ -64,7 +64,7 @@ def sce_workflow(sdtm_data_path: str) -> (PDFFile, PDFFile, PDFFile):
     # Create task that generates TFL report from T_POP table
     t_vscat = create_tfl_report(
         name="T_VSCAT", 
-        command="sas -stdio prod/tfl/t_ae_rel.sas", 
+        command="prod/tfl/t_ae_rel.sas", 
         environment="SAS Analytics Pro",
         hardware_tier= "Small",
         dependencies=[advs]
