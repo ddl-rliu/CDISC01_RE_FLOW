@@ -156,6 +156,19 @@ def Flow(sdtm_data_path: str) -> (PDFFile):
         dependencies=[advs]
         
     )
+    # Create AE Analysis R report 
+    ae_analysis = DominoTask(
+        name="AE Analysis in ggplot and R",
+        command="prod/tfl/ae_analysis.R", 
+        environment="GxP Validated R & Py", 
+        hardware_tier="Small",
+        inputs=[
+            Input(name="adsl", type=PDFFile, value=adsl)
+        ],
+        outputs=[
+            Output(name="report", type=PDFFile) # SPECIFY OUTPUTS IF THERE ARE ANY
+        ]
+    )
     # Combine all TFLs into a single PDF 
     merge_pdf = DominoTask(
         name="Merge TFL PDFs",
