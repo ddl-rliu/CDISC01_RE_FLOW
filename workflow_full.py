@@ -162,4 +162,5 @@ def workflow_full(sdtm_data_path: str) -> (PDFFile, PDFFile, PDFFile, PDFFile, P
         environment="GxP Validated R & Py",
         hardware_tier= "Small",
         dependencies=[t_ae_rel, t_conmed, t_demog, t_eff, t_pop, t_saf, t_vitals, t_vscat]
+    )    
     return t_ae_rel, t_vscat, t_conmed, t_demog, t_eff, t_saf, t_vitals, l_medhist, combine_pdfs
