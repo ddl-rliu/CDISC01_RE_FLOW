@@ -154,13 +154,13 @@
   %if &__SDTM_DATASET. eq %str() %then %put %str(ER)ROR: Environment Variable SDTM_DATASET not set;
   libname SDTM "/mnt/imported/data/snapshots/&__SDTM_DATASET./&__DCUTDTC." access=readonly;
   * local read/write acces to ADaM and QC folders;
-  libname ADAM   "&__localdata_path./ADAM/snapshots/1";
-  libname ADAMQC "&__localdata_path./ADAMQC/snapshots/1";
+  libname ADAM   "/mnt/data/snapshots/ADAM/snapshots/1";
+  libname ADAMQC "/mnt/data/snapshots/ADAMQC/snapshots/1";
   * local read/write for TFL datasets ;
-  libname TFL   "&__localdata_path./TFL/snapshots/1";
-  libname TFLQC "&__localdata_path./TFLQC/snapshots/1";
+  libname TFL   "/mnt/data/snapshots/TFL/snapshots/1";
+  libname TFLQC "/mnt/data/snapshots./TFLQC/snapshots/1";
   * Metadata;
-  libname METADATA "&__localdata_path./METADATA/snapshots/1";
+  libname METADATA "/mnt/data/snapshots/METADATA/snapshots/1";
 %end;
  
 * ==================================================================;
