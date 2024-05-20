@@ -4,10 +4,11 @@ from flytekit.types.file import FlyteFile,PDFFile
 from flytekit import WorkflowFailurePolicy
 from utils.adam import create_adam_data
 from utils.tfl import create_tfl_report
+from utils.flyte import DominoTask, Input, Output
 from typing import TypeVar
 
-@workflow
-def adam_tfl(sdtm_data_path: str) -> (PDFFile, PDFFile, PDFFile, PDFFile, PDFFile, PDFFile, PDFFile, PDFFile):
+@workflow(failure_policy=WorkflowFailurePolicy.FAIL_AFTER_EXECUTABLE_NODES_COMPLETE)
+def Flow(sdtm_data_path: str) -> (PDFFile):
     """
     This script mocks a sample clinical trial using Domino Flows. 
 
@@ -15,7 +16,7 @@ def adam_tfl(sdtm_data_path: str) -> (PDFFile, PDFFile, PDFFile, PDFFile, PDFFil
 
     To the run the workflow remotely, execute the following code in your terminal:
     
-    pyflyte run --copy-all --remote workflow_1.py adam_tfl --sdtm_data_path "/mnt/imported/data/snapshots/sdtm-blind/1"
+    pyflyte run --copy-all --remote ADaM_TFL.py Flow --sdtm_data_path "/mnt/imported/data/snapshots/sdtm-blind/1"
 
     :param sdtm_data_path: The root directory of your SDTM dataset
     :return: A list of PDF files containing the TFL reports
@@ -155,12 +156,25 @@ def adam_tfl(sdtm_data_path: str) -> (PDFFile, PDFFile, PDFFile, PDFFile, PDFFil
         dependencies=[advs]
         
     )
-    # Create task that generates TFL report from L_MEDHIST list
-    #combine_pdfs = create_tfl_report(
-     #   name="COMBINE_PDFs", 
-      #  command="utilities/combine_tfl.py", 
-       # environment="GxP Validated R & Py",
-        #hardware_tier= "Small",
-        #dependencies=[t_ae_rel, t_conmed, t_demog, t_eff, t_pop, t_saf, t_vitals, t_vscat]
-    #)    
-    return t_ae_rel, t_vscat, t_conmed, t_demog, t_eff, t_saf, t_vitals, l_medhist
+    # Combine all TFLs into a single PDF 
+    merge_pdf = DominoTask(
+        name="Merge TFL PDFs",
+        command="utilities/merge_tfl.py", 
+        environment="GxP Validated R & Py", 
+        hardware_tier="Small",
+        inputs=[
+            Input(name="t_pop", type=PDFFile, value=t_pop),
+            Input(name="t_ae_rel", type=PDFFile, value=t_ae_rel),
+            Input(name="t_conmed", type=PDFFile, value=t_conmed),
+            Input(name="t_demog", type=PDFFile, value=t_demog),
+            Input(name="t_eff", type=PDFFile, value=t_eff),
+            Input(name="t_saf", type=PDFFile, value=t_saf),
+            Input(name="t_vitals", type=PDFFile, value=t_vitals),
+            Input(name="t_vscat", type=PDFFile, value=t_vscat),
+            Input(name="l_medhist", type=PDFFile, value=l_medhist)
+        ],
+        outputs=[
+            Output(name="report", type=PDFFile) # SPECIFY OUTPUTS IF THERE ARE ANY
+        ]
+    )
+    return merge_pdf

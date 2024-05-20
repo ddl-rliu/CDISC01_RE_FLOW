@@ -4,6 +4,7 @@ from flytekit.types.file import FlyteFile,PDFFile
 from flytekit import WorkflowFailurePolicy
 from utils.adam import create_adam_data
 from utils.tfl import create_tfl_report
+from utils.flyte import DominoTask, Input, Output
 from typing import TypeVar
 
 @workflow(failure_policy=WorkflowFailurePolicy.FAIL_AFTER_EXECUTABLE_NODES_COMPLETE)
@@ -35,5 +36,18 @@ def sce_workflow(sdtm_data_path: str) -> (PDFFile):
         environment="SAS Analytics Pro",
         hardware_tier= "Small",
         dependencies=[adsl]
+    )
+  # Generic task
+    generic_task = DominoTask(
+        name="Python task",
+        command="utilities/combine_tfl.py", # YOU CAN CHANGE THIS TO WHATEVER COMMAND
+        environment="GxP Validated R & Py", 
+        hardware_tier="Small",
+        inputs=[
+            Input(name="t_pop", type=PDFFile, value=t_pop)
+        ],
+        outputs=[
+            Output(name="report", type=PDFFile) # SPECIFY OUTPUTS IF THERE ARE ANY
+        ]
     )
     return t_pop
