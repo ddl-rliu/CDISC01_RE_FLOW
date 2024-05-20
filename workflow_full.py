@@ -153,5 +153,13 @@ def workflow_full(sdtm_data_path: str) -> (PDFFile, PDFFile, PDFFile, PDFFile, P
         environment="SAS Analytics Pro",
         hardware_tier= "Small",
         dependencies=[advs]
+        
     )
-    return t_ae_rel, t_vscat, t_conmed, t_demog, t_eff, t_saf, t_vitals, l_medhist
+    # Create task that generates TFL report from L_MEDHIST list
+    combine_pdfs = create_tfl_report(
+        name="COMBINE_PDFs", 
+        command="utilities/combine_tfl.py", 
+        environment="GxP Validated R & Py",
+        hardware_tier= "Small",
+        dependencies=[t_ae_rel, t_conmed, t_demog, t_eff, t_pop, t_saf, t_vitals, t_vscat]
+    return t_ae_rel, t_vscat, t_conmed, t_demog, t_eff, t_saf, t_vitals, l_medhist, combine_pdfs
