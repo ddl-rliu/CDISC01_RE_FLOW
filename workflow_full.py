@@ -83,13 +83,13 @@ def workflow_full(sdtm_data_path: str) -> (PDFFile, PDFFile, PDFFile, PDFFile, P
         dependencies=[adsl]
     )
     # Create task that generates TFL report from T_POP table.
-    #t_pop = create_tfl_report(
-    #   name="T_POP", 
-    #    command="prod/tfl/t_pop.sas", 
-    #    environment="SAS Analytics Pro",
-    #    hardware_tier= "Small",
-    #    dependencies=[adsl]
-    #)
+    t_pop = create_tfl_report(
+       name="T_POP", 
+        command="prod/tfl/t_pop.sas", 
+        environment="SAS Analytics Pro",
+        hardware_tier= "Small",
+        dependencies=[adsl]
+    )
     # Create task that generates TFL report from T_AE_REL table.
     t_ae_rel = create_tfl_report(
         name="T_AE_REL", 
