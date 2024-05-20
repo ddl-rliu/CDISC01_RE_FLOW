@@ -158,7 +158,7 @@
   libname ADAMQC "/mnt/data/snapshots/ADAMQC/snapshots/1";
   * local read/write for TFL datasets ;
   libname TFL   "/mnt/data/snapshots/TFL/snapshots/1";
-  libname TFLQC "/mnt/data/snapshots./TFLQC/snapshots/1";
+  libname TFLQC "/mnt/data/snapshots/TFLQC/snapshots/1";
   * Metadata;
   libname METADATA "/mnt/data/snapshots/METADATA/snapshots/1";
 %end;
