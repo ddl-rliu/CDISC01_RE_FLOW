@@ -7,7 +7,7 @@ from utils.tfl import create_tfl_report
 from typing import TypeVar
 
 @workflow
-def workflow_full(sdtm_data_path: str) -> (PDFFile, PDFFile, PDFFile, PDFFile, PDFFile, PDFFile, PDFFile, PDFFile):
+def adam_tfl(sdtm_data_path: str) -> (PDFFile, PDFFile, PDFFile, PDFFile, PDFFile, PDFFile, PDFFile, PDFFile):
     """
     This script mocks a sample clinical trial using Domino Flows. 
 
@@ -15,7 +15,7 @@ def workflow_full(sdtm_data_path: str) -> (PDFFile, PDFFile, PDFFile, PDFFile, P
 
     To the run the workflow remotely, execute the following code in your terminal:
     
-    pyflyte run --copy-all --remote workflow_full.py workflow_full --sdtm_data_path "/mnt/imported/data/snapshots/sdtm-blind/1"
+    pyflyte run --copy-all --remote workflow_1.py adam_tfl --sdtm_data_path "/mnt/imported/data/snapshots/sdtm-blind/1"
 
     :param sdtm_data_path: The root directory of your SDTM dataset
     :return: A list of PDF files containing the TFL reports
@@ -156,11 +156,11 @@ def workflow_full(sdtm_data_path: str) -> (PDFFile, PDFFile, PDFFile, PDFFile, P
         
     )
     # Create task that generates TFL report from L_MEDHIST list
-    combine_pdfs = create_tfl_report(
-        name="COMBINE_PDFs", 
-        command="utilities/combine_tfl.py", 
-        environment="GxP Validated R & Py",
-        hardware_tier= "Small",
-        dependencies=[t_ae_rel, t_conmed, t_demog, t_eff, t_pop, t_saf, t_vitals, t_vscat]
-    )    
-    return t_ae_rel, t_vscat, t_conmed, t_demog, t_eff, t_saf, t_vitals, l_medhist, combine_pdfs
+    #combine_pdfs = create_tfl_report(
+     #   name="COMBINE_PDFs", 
+      #  command="utilities/combine_tfl.py", 
+       # environment="GxP Validated R & Py",
+        #hardware_tier= "Small",
+        #dependencies=[t_ae_rel, t_conmed, t_demog, t_eff, t_pop, t_saf, t_vitals, t_vscat]
+    #)    
+    return t_ae_rel, t_vscat, t_conmed, t_demog, t_eff, t_saf, t_vitals, l_medhist

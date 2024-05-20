@@ -7,7 +7,7 @@ from utils.tfl import create_tfl_report
 from typing import TypeVar
 
 @workflow(failure_policy=WorkflowFailurePolicy.FAIL_AFTER_EXECUTABLE_NODES_COMPLETE)
-def sce_workflow(sdtm_data_path: str) -> (PDFFile):
+def sdtm(sdtm_data_path: str) -> (PDFFile):
     """
     This script mocks a sample clinical trial using Domino Flows. 
 
@@ -15,7 +15,7 @@ def sce_workflow(sdtm_data_path: str) -> (PDFFile):
 
     To the run the workflow remotely, execute the following code in your terminal:
     
-    pyflyte run --copy-all --remote workflow.py sce_workflow --sdtm_data_path "/mnt/imported/data/snapshots/sdtm-blind/1"
+    pyflyte run --copy-all --remote workflow_2.py sdtm --sdtm_data_path "/mnt/imported/data/snapshots/sdtm-blind/1"
 
     :param sdtm_data_path: The root directory of your SDTM dataset
     :return: A list of PDF files containing the TFL reports
