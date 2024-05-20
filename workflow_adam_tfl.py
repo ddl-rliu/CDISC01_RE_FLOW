@@ -1,6 +1,7 @@
 import os
 from flytekit import workflow
 from flytekit.types.file import FlyteFile,PDFFile
+from flytekit import WorkflowFailurePolicy
 from utils.adam import create_adam_data
 from utils.tfl import create_tfl_report
 from typing import TypeVar, NamedTuple
