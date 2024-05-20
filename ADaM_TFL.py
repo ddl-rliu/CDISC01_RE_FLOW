@@ -154,16 +154,28 @@ def Flow(sdtm_data_path: str) -> (PDFFile):
         environment="SAS Analytics Pro",
         hardware_tier= "Small",
         dependencies=[advs]
-        
     )
-    # Create AE Analysis R report 
+    # Create AE Analysis Plot 
     ae_analysis = DominoTask(
         name="AE Analysis in ggplot and R",
         command="prod/tfl/ae_analysis.R", 
         environment="GxP Validated R & Py", 
         hardware_tier="Small",
         inputs=[
-            Input(name="adsl", type=PDFFile, value=adsl)
+            Input(name="adae", type=FlyteFile[TypeVar("sas7bdat")], value=adae.data)
+        ],
+        outputs=[
+            Output(name="report", type=PDFFile) # SPECIFY OUTPUTS IF THERE ARE ANY
+        ]
+    )
+    # Create SL Analysis R Plot 
+    ae_analysis = DominoTask(
+        name="Average Age in ggplot and R",
+        command="prod/tfl/sl_analysis.R", 
+        environment="GxP Validated R & Py", 
+        hardware_tier="Small",
+        inputs=[
+            Input(name="adsl", type=FlyteFile[TypeVar("sas7bdat")], value=adsl.data)
         ],
         outputs=[
             Output(name="report", type=PDFFile) # SPECIFY OUTPUTS IF THERE ARE ANY
