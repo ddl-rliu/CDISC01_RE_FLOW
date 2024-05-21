@@ -26,7 +26,7 @@ def Flow(sdtm_data_path: str) -> (PDFFile):
         name="ADSL", 
         command="prod/adam/adsl.sas",
         environment="SAS Analytics Pro", # Optional parameter. If not set, then the default for the project will be used.
-        hardware_tier= "Small", # Optional parameter. If not set, then the default for the project will be used.
+        hardware_tier= "Medium - [AWS US]", # Optional parameter. If not set, then the default for the project will be used.
         sdtm_data_path=sdtm_data_path # Note this this is simply the input value taken in from the command line argument
     )
     # Create task that generates ADAE dataset. 
@@ -34,7 +34,7 @@ def Flow(sdtm_data_path: str) -> (PDFFile):
         name="ADAE", 
         command="prod/adam/adae.sas", 
         environment="SAS Analytics Pro",
-        hardware_tier= "Small",
+        hardware_tier= "Medium - [AWS US]",
         sdtm_data_path=sdtm_data_path, 
         dependencies=[adsl] # Note how this is the output from the previous task
     )
@@ -43,7 +43,7 @@ def Flow(sdtm_data_path: str) -> (PDFFile):
         name="ADVS", 
         command="prod/adam/advs.sas", 
         environment="SAS Analytics Pro",
-        hardware_tier= "Small",
+        hardware_tier= "Medium - [AWS US]",
         sdtm_data_path=sdtm_data_path, 
         dependencies=[adsl, adae]
     )
@@ -52,7 +52,7 @@ def Flow(sdtm_data_path: str) -> (PDFFile):
         name="ADCM", 
         command="prod/adam/adcm.sas", 
         environment="SAS Analytics Pro",
-        hardware_tier= "Small",
+        hardware_tier= "Medium - [AWS US]",
         sdtm_data_path=sdtm_data_path, 
         dependencies=[adsl]
     )
@@ -61,7 +61,7 @@ def Flow(sdtm_data_path: str) -> (PDFFile):
         name="ADEF", 
         command="prod/adam/adef.sas", 
         environment="SAS Analytics Pro",
-        hardware_tier= "Small",
+        hardware_tier= "Medium - [AWS US]",
         sdtm_data_path=sdtm_data_path, 
         dependencies=[adsl]
     )
@@ -70,7 +70,7 @@ def Flow(sdtm_data_path: str) -> (PDFFile):
         name="ADLB", 
         command="prod/adam/adlb.sas", 
         environment="SAS Analytics Pro",
-        hardware_tier= "Small",
+        hardware_tier= "Medium - [AWS US]",
         sdtm_data_path=sdtm_data_path, 
         dependencies=[adsl]
     )
@@ -79,7 +79,7 @@ def Flow(sdtm_data_path: str) -> (PDFFile):
         name="ADMH", 
         command="prod/adam/admh.sas", 
         environment="SAS Analytics Pro",
-        hardware_tier= "Small",
+        hardware_tier= "Medium - [AWS US]",
         sdtm_data_path=sdtm_data_path, 
         dependencies=[adsl]
     )
@@ -88,7 +88,7 @@ def Flow(sdtm_data_path: str) -> (PDFFile):
        name="T_POP", 
         command="prod/tfl/t_pop.sas", 
         environment="SAS Analytics Pro",
-        hardware_tier= "Small",
+        hardware_tier= "Small - [AWS US]",
         dependencies=[adsl]
     )
     # Create task that generates TFL report from T_AE_REL table.
@@ -96,7 +96,7 @@ def Flow(sdtm_data_path: str) -> (PDFFile):
         name="T_AE_REL", 
         command="prod/tfl/t_ae_rel.sas", 
         environment="SAS Analytics Pro",
-        hardware_tier= "Small",
+        hardware_tier= "Small - [AWS US]",
         dependencies=[adae]
     )
     # Create task that generates TFL report from T_VSCAT table
@@ -104,7 +104,7 @@ def Flow(sdtm_data_path: str) -> (PDFFile):
         name="T_VSCAT", 
         command="prod/tfl/t_ae_rel.sas", 
         environment="SAS Analytics Pro",
-        hardware_tier= "Small",
+        hardware_tier= "Small - [AWS US]",
         dependencies=[advs]
     )
     # Create task that generates TFL report from T_CONMED table
@@ -112,7 +112,7 @@ def Flow(sdtm_data_path: str) -> (PDFFile):
         name="T_CONMED", 
         command="prod/tfl/t_conmed.sas", 
         environment="SAS Analytics Pro",
-        hardware_tier= "Small",
+        hardware_tier= "Small - [AWS US]",
         dependencies=[adcm]
     )
      # Create task that generates TFL report from T_DEMOG table
@@ -120,7 +120,7 @@ def Flow(sdtm_data_path: str) -> (PDFFile):
         name="T_DEMOG", 
         command="prod/tfl/t_demog.sas", 
         environment="SAS Analytics Pro",
-        hardware_tier= "Small",
+        hardware_tier= "Small - [AWS US]",
         dependencies=[adsl]
     )
      # Create task that generates TFL report from T_EFF table
@@ -128,7 +128,7 @@ def Flow(sdtm_data_path: str) -> (PDFFile):
         name="T_EFF", 
         command="prod/tfl/t_eff.sas", 
         environment="SAS Analytics Pro",
-        hardware_tier= "Small",
+        hardware_tier= "Small - [AWS US]",
         dependencies=[adef]
     )
      # Create task that generates TFL report from T_SAF table
@@ -136,7 +136,7 @@ def Flow(sdtm_data_path: str) -> (PDFFile):
         name="T_SAF", 
         command="prod/tfl/t_saf.sas", 
         environment="SAS Analytics Pro",
-        hardware_tier= "Small",
+        hardware_tier= "Small - [AWS US]",
         dependencies=[adsl, adae]
     )
       # Create task that generates TFL report from T_VITALS table
@@ -144,7 +144,7 @@ def Flow(sdtm_data_path: str) -> (PDFFile):
         name="T_VITALS", 
         command="prod/tfl/t_vitals.sas", 
         environment="SAS Analytics Pro",
-        hardware_tier= "Small",
+        hardware_tier= "Small - [AWS US]",
         dependencies=[advs]
     )
      # Create task that generates TFL report from L_MEDHIST list
@@ -152,15 +152,15 @@ def Flow(sdtm_data_path: str) -> (PDFFile):
         name="L_MEDHIST", 
         command="prod/tfl/l_medhist.sas", 
         environment="SAS Analytics Pro",
-        hardware_tier= "Small",
+        hardware_tier= "Small - [AWS US]",
         dependencies=[advs]
     )
     # Create AE Analysis Plot 
     ae_analysis = DominoTask(
-        name="AE Analysis in ggplot and R",
+        name="AE Analysis Plot in ggplot and R",
         command="prod/tfl/ae_analysis.R", 
         environment="GxP Validated R & Py", 
-        hardware_tier="Small",
+        hardware_tier="Small - [AWS US]",
         inputs=[
             Input(name="adae", type=FlyteFile[TypeVar("sas7bdat")], value=adae.data)
         ],
@@ -169,11 +169,11 @@ def Flow(sdtm_data_path: str) -> (PDFFile):
         ]
     )
     # Create SL Analysis R Plot 
-    ae_analysis = DominoTask(
-        name="Average Age in ggplot and R",
+    sl_analysis = DominoTask(
+        name="Average Age Plot in ggplot and R",
         command="prod/tfl/sl_analysis.R", 
         environment="GxP Validated R & Py", 
-        hardware_tier="Small",
+        hardware_tier="Small - [AWS US]",
         inputs=[
             Input(name="adsl", type=FlyteFile[TypeVar("sas7bdat")], value=adsl.data)
         ],
@@ -186,7 +186,7 @@ def Flow(sdtm_data_path: str) -> (PDFFile):
         name="Merge TFL PDFs",
         command="utilities/merge_tfl.py", 
         environment="GxP Validated R & Py", 
-        hardware_tier="Small",
+        hardware_tier="Small - [AWS US]",
         inputs=[
             Input(name="t_pop", type=PDFFile, value=t_pop),
             Input(name="t_ae_rel", type=PDFFile, value=t_ae_rel),
