@@ -163,9 +163,6 @@ def Flow(sdtm_data_path: str) -> (PDFFile):
         hardware_tier="Small - [AWS US]",
         inputs=[
             Input(name="adae", type=FlyteFile[TypeVar("sas7bdat")], value=adae.data)
-        ],
-        outputs=[
-            Output(name="report", type=PDFFile) # SPECIFY OUTPUTS IF THERE ARE ANY
         ]
     )
     # Create SL Analysis R Plot 
@@ -176,9 +173,6 @@ def Flow(sdtm_data_path: str) -> (PDFFile):
         hardware_tier="Small - [AWS US]",
         inputs=[
             Input(name="adsl", type=FlyteFile[TypeVar("sas7bdat")], value=adsl.data)
-        ],
-        outputs=[
-            Output(name="report", type=PDFFile) # SPECIFY OUTPUTS IF THERE ARE ANY
         ]
     )
     # Combine all TFLs into a single PDF 
