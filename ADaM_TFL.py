@@ -8,7 +8,7 @@ from utils.flyte import DominoTask, Input, Output
 from typing import TypeVar
 
 @workflow(failure_policy=WorkflowFailurePolicy.FAIL_AFTER_EXECUTABLE_NODES_COMPLETE)
-def Flow(sdtm_data_path: str) -> (PDFFile):
+def Flow(sdtm_data_path: str):
     """
     This script mocks a sample clinical trial using Domino Flows. 
 
@@ -191,9 +191,6 @@ def Flow(sdtm_data_path: str) -> (PDFFile):
             Input(name="t_vitals", type=PDFFile, value=t_vitals),
             Input(name="t_vscat", type=PDFFile, value=t_vscat),
             Input(name="l_medhist", type=PDFFile, value=l_medhist)
-        ],
-        outputs=[
-            Output(name="report", type=PDFFile) # SPECIFY OUTPUTS IF THERE ARE ANY
         ]
     )
     return merge_pdf
